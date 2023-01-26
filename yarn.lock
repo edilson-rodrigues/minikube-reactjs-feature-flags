@@ -1553,6 +1553,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@paralleldrive/react-feature-toggles@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@paralleldrive/react-feature-toggles/-/react-feature-toggles-2.3.1.tgz#7b4f105fcb003fd22a875f7718a737ec78751add"
+  integrity sha512-GJbpD2R+h2s1SjlZgFGSlAMHSMJLJYuGk/0GMiVzubOchOun/dIZXp8HqYvNXvr4yOFU4Ocsgd8BgribBZIGrw==
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.10.tgz#2eba163b8e7dbabb4ce3609ab5e32ab63dda3ef8"
