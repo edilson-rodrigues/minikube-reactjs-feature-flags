@@ -22,9 +22,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docker-build": "docker build -f Dockerfile -t react-js-feature:1.0.0-dev .",
-    "docker-start": "docker run --rm -it --name web -p 3000:3000 react-js-feature:1.0.0-dev",
-    "docker-rmi": "docker rmi $(docker images -q) --force"
+    "docker-build-dev": "docker build -f Dockerfile.dev -t react-js-feature:1.0.0-dev .",
+    "docker-build-prod": "docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
+    "docker-start-dev": "docker run --rm -it --name web -p 3000:3000 react-js-feature:1.0.0-dev",
+    "docker-start-prod": "docker run --rm -it --name web -p 3000:80 react-js-feature:1.0.0-prod",
+    "docker-rmi": "docker rmi $(docker images -q) --force",
+    "deployment": "kubectl apply -f deployments/deployment.yml",
+    "minikube": "minikube dashboard",
+    "minikube-run": "minikube start",
+    "minikube-service": "minikube service minikube-reactjs-feature-flags"
   },
   "eslintConfig": {
     "extends": [
