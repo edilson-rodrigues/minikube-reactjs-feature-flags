@@ -1,14 +1,16 @@
-FROM node:16.14.0-alpine3.15 as dev
+FROM node:16.14.0-alpine3.15 AS build
 
 WORKDIR /code
 
-COPY package.json package.json
-COPY yarn.lock yarn.lock
-
-RUN yarn
-
-RUN rm -f yarn.lock
-
 COPY . .
 
-CMD ["yarn", "start"]
+RUN yarn && yarn build
+
+
+FROM nginx:stable-alpine AS prod
+
+COPY --from=build /code/build /usr/share/nginx/html 
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
