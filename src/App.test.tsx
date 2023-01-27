@@ -1,9 +1,27 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+import * as useFeatureToggleMock from "./hooks/useFeatureToggle";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+  test("renders this is the active component", () => {
+    jest
+      .spyOn(useFeatureToggleMock, "useFeatureToggle")
+      .mockReturnValue({ isFeatureEnabled: ["@active-component"] });
+
+    render(<App />);
+
+    const textElement = screen.getByText(/this is the active component/i);
+    expect(textElement).toBeInTheDocument();
+  });
+
+  test("renders this is the inactive component", () => {
+    jest
+      .spyOn(useFeatureToggleMock, "useFeatureToggle")
+      .mockReturnValue({ isFeatureEnabled: ["@inactive-component"] });
+
+    render(<App />);
+
+    const textElement = screen.getByText(/this is the inactive component/i);
+    expect(textElement).toBeInTheDocument();
+  });
 });
