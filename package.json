@@ -25,7 +25,7 @@
     "eject": "react-scripts eject",
     "build-server": "docker build -f Dockerfile.server -t server-feature-flags:1.0.0 .",
     "start-server": "docker run --rm -it --name web -p 8000:8000 server-feature-flags:1.0.0",
-    "minikube-build-prod": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
+    "minikube-build-prod": "minikube start && eval $(minikube docker-env) && kubectl create -f deployments/deployment.yml && docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
     "minikube-start-prod": "minikube service minikube-reactjs-feature-flags",
     "docker-stop": "docker kill $(docker ps -q) && minikube stop --all",
     "docker-delete": "yarn docker-stop && docker rmi $(docker images -q) --force && docker rm $(docker ps -a -q)"
