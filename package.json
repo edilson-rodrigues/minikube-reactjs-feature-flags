@@ -11,6 +11,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "axios": "^1.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -22,15 +23,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docker-build-dev": "docker build -f Dockerfile.dev -t react-js-feature:1.0.0-dev .",
-    "docker-build-prod": "docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
-    "docker-start-dev": "docker run --rm -it --name web -p 3000:3000 react-js-feature:1.0.0-dev",
-    "docker-start-prod": "docker run --rm -it --name web -p 3000:80 react-js-feature:1.0.0-prod",
-    "docker-rmi": "docker rmi $(docker images -q) --force",
-    "deployment": "kubectl apply -f deployments/deployment.yml",
-    "minikube": "minikube dashboard",
-    "minikube-run": "minikube start",
-    "minikube-service": "minikube service minikube-reactjs-feature-flags"
+    "build-server": "docker build -f Dockerfile.server -t server-feature-flags:1.0.0 .",
+    "start-server": "docker run --rm -it --name web -p 8000:8000 server-feature-flags:1.0.0",
+    "minikube-build-prod": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
+    "minikube-start-prod": "minikube service minikube-reactjs-feature-flags",
+    "docker-stop": "docker kill $(docker ps -q) && minikube stop --all",
+    "docker-delete": "yarn docker-stop && docker rmi $(docker images -q) --force && docker rm $(docker ps -a -q)"
   },
   "eslintConfig": {
     "extends": [
