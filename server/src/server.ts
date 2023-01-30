@@ -1,7 +1,8 @@
 import { Router, Request, Response } from "express";
 import express = require("express");
-import db = require("./database");
 import bodyParser = require("body-parser");
+import db = require("./database");
+var cors = require("cors");
 
 const HTTP_PORT = 8000;
 
@@ -10,6 +11,7 @@ const app = express();
 const route = Router();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,16 +24,22 @@ route.get("/flags", (req: Request, res: Response, next) => {
   const sql = "select * from feature_toggle";
   const params: [] = [];
 
-  db.all(sql, params, (err: Error | null, rows: any) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      return;
+  db.all(
+    sql,
+    params,
+    (err: Error | null, rows: [{ id: number; flag: string }]) => {
+      console.log(rows);
+      if (err) {
+        res.status(400).json({ error: err.message });
+        return;
+      }
+
+      res.json({
+        message: "success",
+        data: rows,
+      });
     }
-    res.json({
-      message: "success",
-      data: rows,
-    });
-  });
+  );
 });
 
 app.patch("/flag/:id", (req: Request, res: Response, next) => {
