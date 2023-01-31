@@ -11,7 +11,7 @@ POC reactjs-feature-toggle com kubernets/minikube
 * kubectl 1.26.1 -> https://kubernetes.io/docs/tasks/tools/
 * minikube v1.29.0 -> https://minikube.sigs.k8s.io/docs/start/
 
-### certifique as versoes estao instaladas
+### certifique se às versões estão instaladas corretamente
 
 </br> 
 
@@ -94,4 +94,4 @@ port: exposta no log do minikube
    ms-azuretools.vscode-docker
 
 * ajuda
-  -  se falhar a instalação das dependencias, execute novamente o script do build **minikube-build-prod** ou **build-server**, de acordo com o script em execução.
+  -  Se falhar a instalação das dependências, execute novamente o script do build **minikube-build-prod** ou **build-server**, de acordo com o script em execução.
