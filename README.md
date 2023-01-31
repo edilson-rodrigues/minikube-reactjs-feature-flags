@@ -82,16 +82,16 @@ $ minikube service minikube-reactjs-feature-flags
 👉  http://127.0.0.1:45151
 ❗  Because you are using a Docker driver on linux, the terminal needs to be open to run it.
 ```
-### abrir no navegador a seguinte url 👉  http://127.0.0.1:port.
-port: exposta no log do minikube
+### Abrir a seguinte url no navegador 👉  http://127.0.0.1:**port**.
+**port**: no log do minikube
 
 </br>
 
-# extra aux. containers
+## extra aux. containers
  - vscode extensions id
-   ms-vscode-remote.remote-wsl
-   ms-kubernetes-tools.vscode-kubernetes-tools
-   ms-azuretools.vscode-docker
+   * ms-vscode-remote.remote-wsl
+   * ms-kubernetes-tools.vscode-kubernetes-tools
+   * ms-azuretools.vscode-docker
 
-* ajuda
+## ajuda
   -  Se falhar a instalação das dependências, execute novamente o script do build **minikube-build-prod** ou **build-server**, de acordo com o script em execução.
