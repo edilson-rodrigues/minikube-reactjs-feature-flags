@@ -27,7 +27,7 @@ POC reactjs-feature-toggle com kubernets/minikube
 2. build react web
  - execute o seguinte comando
  ```cmd
-  yarn minikube-build-prod
+  yarn build-web
  ```
 </br>
 
@@ -58,7 +58,7 @@ Connected to the SQLite database.
 4. rodar o servidor web
 - Obs.: abra outra janela do terminal e execute
 ```cmd
-  yarn minikube-start-prod
+  yarn start-web
 ```
 </br>
 
@@ -82,7 +82,7 @@ $ minikube service minikube-reactjs-feature-flags
 👉  http://127.0.0.1:45151
 ❗  Because you are using a Docker driver on linux, the terminal needs to be open to run it.
 ```
-### Abrir a seguinte url no navegador 👉  http://127.0.0.1:**port**.
+### Abrir a seguinte url no navegador 👉  http://127.0.0.1:port.
 **port**: no log do minikube
 
 </br>
@@ -94,4 +94,4 @@ $ minikube service minikube-reactjs-feature-flags
    * ms-azuretools.vscode-docker
 
 ## ajuda
-  -  Se falhar a instalação das dependências, execute novamente o script do build **minikube-build-prod** ou **build-server**, de acordo com o script em execução.
+  -  Se falhar a instalação das dependências, execute novamente o script do build **build-web** ou **build-server**, de acordo com o script em execução.
