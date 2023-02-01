@@ -1,31 +1,24 @@
 import { useEffect, useState } from "react";
 import { client } from "../client";
-import { FeatureFlagsData, FeatureToggle, Flags } from "./types";
+import { FeatureToggle, Flags } from "./types";
 
 export function useFeatureToggle(): FeatureToggle {
-  const [data, setData] = useState<FeatureFlagsData>();
+  const [data, setData] = useState<Flags>();
 
-  async function getFlags() {
-    client
-      .get("flags")
-      .then((response) => setData(response.data))
-      .catch((error) => console.error(error));
-  }
+  console.log("data", data);
 
   useEffect(() => {
     if (!data) {
-      getFlags();
+      client
+        .get("http://127.0.0.1:40605/")
+        .then((response) => setData(response.data))
+        .catch((error) => console.error(error));
     }
 
     return;
   }, [data]);
 
-  const flags: Flags = data
-    ? data?.data.map((feature) => feature.flag)
-    : ([] as Flags);
-
   return {
-    flags,
-    getFlags,
+    flags: data ?? [],
   };
 }

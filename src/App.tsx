@@ -2,21 +2,11 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Feature, FeatureToggles } from "@paralleldrive/react-feature-toggles";
 import { useFeatureToggle } from "./hooks";
-import { client } from "./client";
 
-const featureName = "@active-component";
+const featureName = "key-3000";
 
 function App() {
-  const { flags, getFlags } = useFeatureToggle();
-
-  const handleChangeFlag = async (flag: string) => {
-    client
-      .patch("flag/1", {
-        flag,
-      })
-      .then(() => getFlags())
-      .catch((error) => console.error(error));
-  };
+  const { flags } = useFeatureToggle();
 
   return (
     <div className="App">
@@ -26,22 +16,8 @@ function App() {
         <FeatureToggles features={flags}>
           <Feature
             name={featureName}
-            inactiveComponent={() => (
-              <div>
-                <p>This is the inactive component</p>
-                <button onClick={() => handleChangeFlag("@active-component")}>
-                  active component
-                </button>
-              </div>
-            )}
-            activeComponent={() => (
-              <div>
-                <p>This is the active component</p>
-                <button onClick={() => handleChangeFlag("@inactive-component")}>
-                  inactive component
-                </button>
-              </div>
-            )}
+            inactiveComponent={() => <p>This is the inactive component</p>}
+            activeComponent={() => <p>This is the active component</p>}
           />
         </FeatureToggles>
       </header>
