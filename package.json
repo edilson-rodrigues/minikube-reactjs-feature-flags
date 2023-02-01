@@ -21,14 +21,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-server": "docker build -f Dockerfile.server -t server-feature-flags:1.0.0 .",
-    "start-server": "docker run --rm -it --name web -p 8000:8000 server-feature-flags:1.0.0",
-    "minikube-build-prod": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
-    "minikube-start-prod": "minikube service minikube-reactjs-feature-flags",
-    "docker-stop": "docker kill $(docker ps -q) && minikube stop --all",
-    "docker-delete": "yarn docker-stop && docker rmi $(docker images -q) --force && docker rm $(docker ps -a -q)"
+    "build-server": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile.server -t ft_poc:1.0.0 . && kubectl apply -f deployments/configMaps.yaml && kubectl apply -f deployments/deployments.yaml",
+    "build-web": "docker build -f Dockerfile -t react-js-feature:1.0.0-prod . ",
+    "start-server": "minikube service ft",
+    "start-web": "minikube service minikube-reactjs-feature-flags",
+    "apply-config-maps": "kubectl apply -f deployments/configMaps.yaml",
+    "delete-pods": "minikube pause -A && minikube delete --all",
+    "delete-images": "docker rmi $(docker images -q)"
   },
   "eslintConfig": {
     "extends": [
