@@ -5,12 +5,15 @@ import { FeatureToggle, Flags } from "./types";
 export function useFeatureToggle(): FeatureToggle {
   const [data, setData] = useState<Flags>();
 
+  const url = "http://192.168.49.2:31001/";
+
+  console.log("url", url);
   console.log("data", data);
 
   useEffect(() => {
     if (!data) {
       client
-        .get("http://127.0.0.1:40605/")
+        .get(url)
         .then((response) => setData(response.data))
         .catch((error) => console.error(error));
     }
