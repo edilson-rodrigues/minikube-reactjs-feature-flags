@@ -5,8 +5,7 @@ import * as useFeatureToggleMock from "./hooks/useFeatureToggle";
 describe("App", () => {
   test("renders this is the active component", () => {
     jest.spyOn(useFeatureToggleMock, "useFeatureToggle").mockReturnValue({
-      flags: ["@active-component"],
-      getFlags: jest.fn(),
+      flags: ["key-3000"],
     });
 
     render(<App />);
@@ -18,7 +17,6 @@ describe("App", () => {
   test("renders this is the inactive component", () => {
     jest.spyOn(useFeatureToggleMock, "useFeatureToggle").mockReturnValue({
       flags: ["@inactive-component"],
-      getFlags: jest.fn(),
     });
 
     render(<App />);

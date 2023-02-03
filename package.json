@@ -22,14 +22,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-server": "docker build -f Dockerfile.server -t server-feature-flags:1.0.0 .",
-    "start-server": "docker run --rm -it --name web -p 8000:8000 server-feature-flags:1.0.0",
-    "build-web": "minikube start && eval $(minikube docker-env) && kubectl create -f deployments/deployment.yml && docker build -f Dockerfile -t react-js-feature:1.0.0-prod .",
-    "start-web": "minikube service minikube-reactjs-feature-flags",
-    "stop-pods": "minikube stop --all",
-    "delete-deployment": "kubectl delete -f deployments",
-    "delete-images": "docker rmi $(docker images -q) --force && docker rm $(docker ps -a -q)"
+    "build-server": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile.server -t ft_poc:1.0.0 . && kubectl apply -f deployments/configMaps.yaml && kubectl apply -f deployments/deployment.server.yaml",
+    "build-web": "eval $(minikube docker-env) && docker build -f Dockerfile -t ftweb:1.0.0 . && kubectl apply -f deployments/deployment.web.yaml",
+    "build-all": "yarn build-server && yarn build-web",
+    "start-server": "kubectl port-forward svc/ft 31001:10000",
+    "start-web": "kubectl port-forward svc/ftweb 31000:80",
+    "minikube-start-server": "minikube service ft",
+    "minikube-start-web": "minikube service ftweb",
+    "apply-config-maps": "kubectl apply -f deployments/configMaps.yaml",
+    "delete-pods": "minikube pause -A && minikube delete --all",
+    "delete-images": "docker rmi $(docker images -q) --force",
+    "delete-all": "yarn delete-pods && yarn delete-images"
   },
   "eslintConfig": {
     "extends": [

@@ -12,5 +12,5 @@ export type Flags = ReadonlyArray<string>;
 
 export interface FeatureToggle {
   flags: Flags;
-  getFlags: () => void;
+  getFlags?: () => void;
 }
