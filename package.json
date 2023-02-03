@@ -21,10 +21,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-server": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile.server -t ft_poc:1.0.0 . && kubectl apply -f deployments/configMaps.yaml && kubectl apply -f deployments/deployments.yaml",
-    "build-web": "docker build -f Dockerfile -t react-js-feature:1.0.0-prod . ",
-    "start-server": "minikube service ft",
-    "start-web": "minikube service minikube-reactjs-feature-flags",
+    "build-server": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile.server -t ft_poc:1.0.0 . && kubectl apply -f deployments/configMaps.yaml && kubectl apply -f deployments/deployment.server.yaml",
+    "build-web": "eval $(minikube docker-env) && docker build -f Dockerfile -t ftweb:1.0.0 . && kubectl apply -f deployments/deployment.web.yaml",
+    "start-server": "kubectl port-forward svc/ft 10000:10000",
+    "start-web": "kubectl port-forward svc/ftweb 80:80",
+    "minikube-start-server": "minikube service ft",
+    "minikube-start-web": "minikube service ftweb",
     "apply-config-maps": "kubectl apply -f deployments/configMaps.yaml",
     "delete-pods": "minikube pause -A && minikube delete --all",
     "delete-images": "docker rmi $(docker images -q)"
