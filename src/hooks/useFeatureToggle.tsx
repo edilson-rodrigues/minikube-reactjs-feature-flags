@@ -5,7 +5,7 @@ import { FeatureToggle, Flags } from "./types";
 export function useFeatureToggle(): FeatureToggle {
   const [data, setData] = useState<Flags>();
 
-  const url = "http://127.0.0.1:10000/";
+  const url = "http://127.0.0.1:31001/";
 
   console.log("url", url);
   console.log("data", data);
