@@ -21,15 +21,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test": "react-scripts test",
     "build-server": "minikube start && eval $(minikube docker-env) && docker build -f Dockerfile.server -t ft_poc:1.0.0 . && kubectl apply -f deployments/configMaps.yaml && kubectl apply -f deployments/deployment.server.yaml",
     "build-web": "eval $(minikube docker-env) && docker build -f Dockerfile -t ftweb:1.0.0 . && kubectl apply -f deployments/deployment.web.yaml",
-    "start-server": "kubectl port-forward svc/ft 10000:10000",
-    "start-web": "kubectl port-forward svc/ftweb 80:80",
+    "build-all": "yarn build-server && yarn build-web",
+    "start-server": "kubectl port-forward svc/ft 31001:10000",
+    "start-web": "kubectl port-forward svc/ftweb 31000:80",
     "minikube-start-server": "minikube service ft",
     "minikube-start-web": "minikube service ftweb",
     "apply-config-maps": "kubectl apply -f deployments/configMaps.yaml",
     "delete-pods": "minikube pause -A && minikube delete --all",
-    "delete-images": "docker rmi $(docker images -q)"
+    "delete-images": "docker rmi $(docker images -q) --force",
+    "delete-all": "yarn delete-pods && yarn delete-images"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +51,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
